@@ -6,4 +6,5 @@ module.exports = {
     UserSession: require("./Auth/UserSession"),
     Stores: require("./Stores"),
     Image: require("./Image"),
+    Stocks: require("./Stocks")
   };

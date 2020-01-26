@@ -29,21 +29,21 @@ class FooterPage extends React.Component {
                             <h6 className="text-uppercase font-weight-bold"><strong>Coccinelle Factory</strong></h6>
                             <hr className="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style={{width: '60px'}}/>
                             <p>
-                                We are hier to make the besiness eazy for you and your customers.
+                                We are hier to make you look cool like Coccinelle.
                             </p>
                         </Col>
                         <Col md="2" lg="2" xl="2" className="mb-4">
                             <h6 className="text-uppercase font-weight-bold"><strong>Products</strong></h6>
                             <hr className="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style={{width: '60px'}}/>
-                            <p><a href="#!">Open Store</a></p>
+                            <p><a href="#!">Find Store</a></p>
                             <p><a href="#!">Request a deal</a></p>
+
                         </Col>
                         <Col md="3" lg="2" xl="2" className="mb-4">
                             <h6 className="text-uppercase font-weight-bold"><strong>Useful links</strong></h6>
                             <hr className="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style={{width: '60px'}}/>
                             <p><a href="#!">Your Account</a></p>
                             <p><a href="#!">Become an Partner</a></p>
-                            <p><a href="#!">Shipping Rates</a></p>
                             <p><a href="#!">Help</a></p>
                         </Col>
                         <Col md="4" lg="3" xl="3" className="mb-4">

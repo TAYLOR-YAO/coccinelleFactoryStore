@@ -2,16 +2,25 @@
 import React from "react";
 import {connect} from "react-redux";
 import Checkout from "../../Checkout";
+import {Grid, Cell} from "react-mdl";
+import { Redirect } from 'react-router-dom';
 import "./Cart.css";
 const tax = 8.7;
-const discountRate = 5;
+const discountRate = 10;
 const defaultSum = 0;
 let cartSum; 
-let shipping;
-const defaultShipping = 0;
+const shippingRate = 5
 function percentage(tax, subTotal) {
   return (tax * subTotal) / 100;
-}  
+}
+
+function shippingAmount(rate, cust) {
+  return (rate * cust) / 100;
+} 
+
+// function Customize(){
+//     return <Redirect to='/view' />
+// }
 
 function discount(rate, total) {
     return (rate * total) / 100;
@@ -29,18 +38,17 @@ function Cart(props){
             return item.price.$numberDecimal * item.quantity
         }).reduce((a, b) => a + b, 0).toFixed(2);
         // ------Shippping---------- 
-        shipping = props.cart.map(item=>{
-            return parseFloat(item.shipping.$numberDecimal)
-        }).reduce((a, b) => a + b, 0)
     } else {
         cartSum = defaultSum.toFixed(2)
-        shipping = defaultShipping.toFixed(2)
     }
     
+    const shipping = shippingAmount(shippingRate, cartSum)
     const  discountAmount = discount(discountRate, cartSum).toFixed(2)
    
     const  taxAmount =  percentage(tax, cartSum).toFixed(2)
     const total = (parseFloat(cartSum)  -  parseFloat(discountAmount)) + parseFloat(taxAmount) + parseFloat(shipping)
+    let imageIndex = 0
+    
 
     return <main>
             { props.cart.length > 0 ?
@@ -68,7 +76,21 @@ function Cart(props){
                             <div className="basket-product">
                                 <div className="item">
                                 <div className="product-image">
-                                    <img src={item.image} alt={item.name} className="product-frame"/>
+
+                                    <Grid>
+                                        <Cell col={4}>
+                                            <ul>
+                                                {item.images.map((image, index) => (
+                                                    <li key={image}>
+                                                        <img src={image} style={{width:"50%"}} data-index= {index} onClick={(e)=> imageIndex = e.currentTarget.dataset.index} alt ="Item Pre-View"/>
+                                                    </li>
+                                                ))}
+                                            </ul>
+                                        </Cell>
+                                        <Cell col={8}>
+                                            <img className="view-image" style={{width:"100%"}}  src={item.images[imageIndex]} alt="product"/>
+                                        </Cell>
+                                    </Grid>
                                 </div>
                                 <div className="product-details">
                                 <strong style={{fontSize:"18px"}}>{item.name}</strong>
@@ -83,12 +105,23 @@ function Cart(props){
                                             </div> 
 
                                              )}
+                                            <br/>
+                                            <br/>
+                                            
+                                            <a href="/view">
+                                                <button data-id = {item._id}>Customize You Mersurment</button>
+                                            </a>
+                                             {/* <button data-id = {item._id} onClick={()=> <Redirect to='/view' />}>Customize You Mersurment</button> */}
+                                             <br/>
+                                             <hr/>
                                      </div>
                                       : " "}
 
                                     <br/>
                                     <br/>
-                                    <hr/>
+                                    <br/>
+                                    {/* <hr/> */}
+                                    <br/>
                                     <p>{item.details}</p>
 
                                 </div>
@@ -96,11 +129,10 @@ function Cart(props){
                                 <div className="price"> <span className="mobileTitles">Price: </span>{`$${item.price.$numberDecimal}`}</div>
                                 <div className="quantity"> <span className="mobileTitles">Qty: </span>{item.quantity}</div>
                                 <div className="subtotal"><span className="mobileTitles">subtotal: </span>{`$${(item.price.$numberDecimal * item.quantity).toFixed(2)}`}</div>
-                                
                                 <div className="remove">
                                     <button variant="success" onClick = {()=> props.addToCart(item)}>+</button>
                                     <button variant="danger" onClick = {()=> props.removeFromCart(item)}  >-</button>
-                                    <button variant="denger" onClick = {()=> props.removeAllFromCart(item)} style={{width:"70px", padding:"5px", background:"#6351ce", color:"#fff"}}>Remove</button>
+                                    <button variant="denger" onClick = {()=> props.removeAllFromCart(item)} style={{width:"70px", padding:"5px", background:"#000000", color:"#fff"}}>Remove</button>
                                 </div>
                             </div>
                         </div>
@@ -122,7 +154,7 @@ function Cart(props){
                 <div className="subtotal-title">Handling & Shopping: </div>
                 <div className="subtotal-value final-value" id="basket-discount">{`$${shipping.toFixed(2)}`}</div>
 
-                <div className="subtotal-title">Discount:</div>
+                <div className="subtotal-title">Discount{` ${discountRate}%`}:</div>
                 <div className="subtotal-value final-value" id="basket-discount">{`- $${discountAmount}`}</div>
                     <div className="summary-promo hide">
                         <div className="promo-title">Promotion:</div>

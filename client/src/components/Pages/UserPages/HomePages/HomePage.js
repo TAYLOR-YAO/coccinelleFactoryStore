@@ -24,20 +24,18 @@ class HomePage extends Component {
         selectedCompany: "Search by Company",
         company:"",
         products:[],
-        generalProducts:[],
         categories:[],
         companies:[],
         types:[]
     }
 
     componentDidMount (){
-        axios.get("api/displayitems").then(response=>{
+        axios.get("api/instocks").then(response=>{
+            console.log(response.data)
             
             this.setState({
                 // products: response.data.sort(function() { return 0.5 - Math.random() }),
-                products: response.data,
-                generalProducts: response.data
-
+                products: response.data
             })
             
         });
@@ -63,29 +61,29 @@ class HomePage extends Component {
     // }
 
     // ================Shop By type =========================
-    handleTypeChange = (typeOption) => {
-        let filteredIteme = this.state.products.filter(product => {
-            return product.type === typeOption.value;
-        })
+    // handleTypeChange = (typeOption) => {
+    //     let filteredIteme = this.state.products.filter(product => {
+    //         return product.type === typeOption.value;
+    //     })
 
-        this.setState({
-            products: filteredIteme,
-            selectedType: typeOption.value
-        })
-    }
+    //     this.setState({
+    //         products: filteredIteme,
+    //         selectedType: typeOption.value
+    //     })
+    // }
     // =============== Visite specific Store ================
-    handleCompanyChange = (companyOption) => {
-        // alert("Clicked !!")
-        let filteredCompany= this.state.products.filter(product => {
-            // console.log(product)
-            return product.company === companyOption.value;
-        })
+    // handleCompanyChange = (companyOption) => {
+    //     // alert("Clicked !!")
+    //     let filteredCompany= this.state.products.filter(product => {
+    //         // console.log(product)
+    //         return product.company === companyOption.value;
+    //     })
 
-        this.setState({
-            products: filteredCompany,
-            selectedCompany: companyOption.value
-        })
-    }
+    //     this.setState({
+    //         products: filteredCompany,
+    //         selectedCompany: companyOption.value
+    //     })
+    // }
 
     // =============== Shop by Category ================    
     handleCategoryChange = (categoryOption) => {
@@ -100,12 +98,11 @@ class HomePage extends Component {
 
     clearFister =(event)=>{
         event.preventDefault()
-        axios.get("api/displayitems").then(response=>{
+        axios.get("api/instocks").then(response=>{
             this.setState(
                 {
-                    products: response.data.sort(function() { return 0.5 - Math.random() }),
-                    generalProducts: response.data
-
+                    products: response.data
+                    // generalProducts: response.data
                 }
             )
             
@@ -146,7 +143,9 @@ class HomePage extends Component {
                 acc[obj.label]? types.splice(i, 1) : acc[obj.label] = true;
                 return acc;
             }, Object.create(null));
-            const cartNumber = this.props.cart.length
+            const cartNumber = this.props.cart.map(item=>{
+                    return item.quantity 
+                }).reduce((a, b) => a + b, 0)
             
         return(
             <div style={{marginTop:"100px"}}>
@@ -194,10 +193,6 @@ class HomePage extends Component {
                     <article>
                     <ProductLinsting 
                         products ={this.state.products}
-                        displayComoanyArticles={this.displayComoanyArticles}
-                    />
-                    <ProductLinsting 
-                        products ={this.state.generalProducts}
                         displayComoanyArticles={this.displayComoanyArticles}
                     />
                     </article>

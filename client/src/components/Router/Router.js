@@ -10,7 +10,10 @@ import Dashboard from "../Pages/Dashboard/Dashboard";
 import jwt_decode from "jwt-decode";
 import setAuthToken from "../Utils/setAuthToken";
 import { setCurrentUser, logoutUser } from "../Utils/authActions";
-import DummyCart from "../Pages/UserPages/DummyCart/DummyCart"
+import DummyCart from "../Pages/UserPages/DummyCart/DummyCart";
+
+import ItemView from "../features/CartPage/Cart/Customize/Customize";
+
 
 // Check for token to keep user logged in
 if (localStorage.jwtToken) {
@@ -41,6 +44,8 @@ const Router =()=>(
         <PrivateRoute exact path="/cart" component={ShoppingCart} />
 
         <PrivateRoute exact path="/test" component={DummyCart} />
+        <PrivateRoute exact path="/view" component={ItemView} />
+
 
     </Switch>
 )

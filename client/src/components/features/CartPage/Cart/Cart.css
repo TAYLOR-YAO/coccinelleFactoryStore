@@ -30,7 +30,7 @@ button {
 
 button {
   color: #fff;
-  background:#6351ce ;
+  background: #000000; ;
 
 }
 
@@ -40,7 +40,7 @@ button {
 }
 
 .cartLink {
-    background:#6351ce;
+    background: #000000;;
     padding:5px; 
     color:#fff;
     -webkit-border-radius: 4px;
@@ -172,13 +172,13 @@ li.subtotal:before {
 }
 
 .item {
-  width: 55%;
+  width: 70%;
 }
 
 .price,
 .quantity,
 .subtotal {
-  width: 15%;
+  width: 10%;
 }
 
 .subtotal {
@@ -197,7 +197,7 @@ li.subtotal:before {
 
 .remove button {
   width: 50px;
-  background-color: #6351ce;
+  background-color: #000000;
   color: #fff;
   float: none;
   text-transform: uppercase;
@@ -220,11 +220,11 @@ li.subtotal:before {
 }
 
 .product-image {
-  width: 35%;
+  width: 60%;
 }
 
 .product-details {
-  width: 65%;
+  width: 40%;
 }
 
 .product-frame {

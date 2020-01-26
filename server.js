@@ -4,9 +4,9 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const passport = require("passport");
 //  =================================================
-var fileUpload = require('express-fileupload');
-const imageRoutes = require("./routes/image-routes");
 
+const imageRoutes = require("./routes/image-routes");
+const stockRoutes = require("./routes/stock-routes");
 //  =================================================
 
 const inventoryRoutes = require("./routes/inventory-routes")
@@ -41,7 +41,7 @@ mongoose.Promise = Promise;
 // });
 
 // ---------------------------------CosmossDB Connector --------------------------------
-mongoose.connect(process.env.CONNECTING_STRING || 'mongodb://localhost/cofa_store', ()=>{
+mongoose.connect(process.env.CONNECTING_STRING || 'mongodb://localhost/coccinelle-factory', ()=>{
         console.log("Succesfuly Connected to Localhost")
     });
 // --------------------------------------------------------------------------------------
@@ -55,15 +55,11 @@ require("./config/passport")(passport);
 
 app.use("/api",inventoryRoutes);
 app.use("/api", DeliveredRoutes);
-// app.use("/api", userRoutes);
+app.use("/api", stockRoutes);
 // app.use("/api", sellsRoutes);
 app.use("/api", storeRoutes)
 app.use("/api", paymentRoute);
 app.use("/api/users", users);
-//  =================================================
-
-app.use("/api", imageRoutes);
-//  =================================================
 
 app.get("*", (req, res)=>{
     res.sendFile(path.join(__dirname, "client/build/index.html"));
