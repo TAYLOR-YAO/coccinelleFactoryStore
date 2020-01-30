@@ -36,14 +36,15 @@ if(process.env.NODE_ENV === "production"){
 //Connection to mongoDB
 const mongoose = require('mongoose');
 mongoose.Promise = Promise;
-// mongoose.connect(process.env.MONGODB_URI || 'mongodb://assime:assime228@ds341837.mlab.com:41837/heroku_tk9srqsq', ()=>{
-//     console.log("Succesfuly Connected to MongoDB")
-// });
+mongoose.connect(process.env.MONGODB_URI || 'mongodb://assime:assime228@ds263380.mlab.com:63380/heroku_50v8d2p5', ()=>{
+    console.log("Succesfuly Connected to Mlab MongoDB")
+// mongodb://<dbuser>:<dbpassword>@ds263380.mlab.com:63380/heroku_50v8d2p5
+});
 
 // ---------------------------------CosmossDB Connector --------------------------------
-mongoose.connect(process.env.CONNECTING_STRING || 'mongodb://localhost/coccinelle-factory', ()=>{
-        console.log("Succesfuly Connected to Localhost")
-    });
+// mongoose.connect(process.env.CONNECTING_STRING || 'mongodb://localhost/coccinelle-factory', ()=>{
+//         console.log("Succesfuly Connected to Localhost")
+//     });
 // --------------------------------------------------------------------------------------
 
 
