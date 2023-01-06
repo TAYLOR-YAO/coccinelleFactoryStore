@@ -34,7 +34,7 @@
     "react-paypal-express-checkout": "^1.0.5",
     "react-redux": "^5.1.1",
     "react-router-dom": "^4.3.1",
-    "react-scripts": "1.1.4",
+    "react-scripts": "5.0.1",
     "react-select": "^2.4.4",
     "react-shopping-cart": "^1.8.31",
     "react-stripe-checkout": "^2.6.3",
